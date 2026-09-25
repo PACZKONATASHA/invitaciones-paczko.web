@@ -778,17 +778,25 @@ html.menu-abierto, body.menu-abierto{ overflow:hidden; }
 }
 
 
+
 /* ══════════════════════════════════════════
    DECK · una sección por pantalla
    El hero queda fijo de fondo y las secciones
    se cruzan encima con un fundido.
-   Todo vive detrás de .deck-on, que agrega el
-   script: sin JS la página sigue siendo la de antes.
+
+   Sólo se arma en pantallas grandes: en celular
+   hay secciones (las invitaciones, el recorrido)
+   que no entran en una pantalla, así que ahí la
+   página vuelve al scroll de toda la vida.
    ══════════════════════════════════════════ */
 
-/* ── Fondo del hero, siempre presente ───── */
+/* ── Fondo del hero, siempre presente ─────
+   z-index negativo a propósito: al ser un elemento posicionado, con
+   z-index:0 se pintaría por encima del fondo de las secciones que no
+   llevan position:relative (la galería, el recorrido, el footer) y se
+   colaría la foto por detrás del texto. */
 .deck__bg{
-  position:fixed; inset:0; z-index:0;
+  position:fixed; inset:0; z-index:-1;
   overflow:hidden;
   background:var(--tinta);
 }
@@ -804,155 +812,160 @@ html.menu-abierto, body.menu-abierto{ overflow:hidden; }
     radial-gradient(70% 60% at 50% 50%, rgba(255,255,255,.10), transparent 70%);
 }
 
-/* ── Modo deck ──────────────────────────── */
-html.deck-on, html.deck-on body{ height:100%; overflow:hidden; }
-
+/* Las secciones van por encima del fondo fijo */
 .deck{ position:relative; z-index:1; }
 
-html.deck-on .deck{
-  position:fixed; top:0; left:0; right:0;
-  height:100vh;
-  height:100svh;
-}
+/* La navegación del deck no existe fuera del deck */
+.dots,
+.deck__next{ display:none; }
 
-html.deck-on .slide{
-  position:absolute; inset:0; z-index:1;
-  opacity:0; visibility:hidden; pointer-events:none;
-  transition:opacity .9s cubic-bezier(.4,0,.2,1), visibility .9s;
-}
-html.deck-on .slide.is-active{
-  opacity:1; visibility:visible; pointer-events:auto; z-index:2;
-}
 
-/* Vidrio esmerilado: deja ver el hero por detrás de las secciones claras */
-html.deck-on .slide--glass::before{
-  content:''; position:absolute; inset:0; z-index:0;
-  background:rgba(251,247,243,.9);
-  backdrop-filter:blur(22px) saturate(1.05);
-  -webkit-backdrop-filter:blur(22px) saturate(1.05);
-}
-html.deck-on .slide--glass .story,
-html.deck-on .slide--glass .works,
-html.deck-on .slide--glass .tour,
-html.deck-on .slide--glass .offer,
-html.deck-on .slide--glass .foot{ background:transparent; }
-html.deck-on .slide--glass .story__band{ background:rgba(240,220,214,.62); }
+/* ══════════════════════════════════════════
+   Modo deck · sólo de 901px de ancho para arriba
+   (y con alto suficiente para que una sección
+   entre cómoda en la pantalla)
+   ══════════════════════════════════════════ */
+@media (min-width:901px) and (min-height:620px){
 
-/* ── Scroll interno de cada sección ─────── */
-html.deck-on .slide__scroll{
-  position:relative; z-index:1;
-  height:100%;
-  overflow-y:auto; overflow-x:hidden;
-  overscroll-behavior:contain;
-  -webkit-overflow-scrolling:touch;
-  scrollbar-width:none;
-  -ms-overflow-style:none;
-  display:flex; flex-direction:column;
-}
-html.deck-on .slide__scroll::-webkit-scrollbar{ width:0; height:0; }
+  html.deck-on, html.deck-on body{ height:100%; overflow:hidden; }
 
-/* La sección crece hasta llenar la pantalla y su contenido queda centrado;
-   si es más alta, simplemente se desplaza por dentro. */
-html.deck-on .slide__scroll > section{
-  flex:1 0 auto;
-  display:flex; flex-direction:column; justify-content:center;
-  min-height:0;
-}
-html.deck-on .slide__scroll > footer{ flex:0 0 auto; }
+  html.deck-on .deck{
+    position:fixed; top:0; left:0; right:0;
+    height:100vh;
+    height:100svh;
+  }
 
-/* El hero mantiene su tarjeta centrada y deja ver la línea de "bajar" */
-html.deck-on .slide--hero .hero{
-  flex-direction:row;
-  align-items:center;
-  overflow:visible;
-}
+  html.deck-on .slide{
+    position:absolute; inset:0; z-index:1;
+    opacity:0; visibility:hidden; pointer-events:none;
+    transition:opacity .9s cubic-bezier(.4,0,.2,1), visibility .9s;
+  }
+  html.deck-on .slide.is-active{
+    opacity:1; visibility:visible; pointer-events:auto; z-index:2;
+  }
 
-html.deck-on .works{ padding-top:clamp(70px,10vw,110px); }
-html.deck-on .tour .step:last-of-type{ margin-bottom:clamp(50px,7vw,80px); }
+  /* Vidrio esmerilado: deja ver el hero por detrás de las secciones claras */
+  html.deck-on .slide--glass::before{
+    content:''; position:absolute; inset:0; z-index:0;
+    background:rgba(251,247,243,.9);
+    backdrop-filter:blur(22px) saturate(1.05);
+    -webkit-backdrop-filter:blur(22px) saturate(1.05);
+  }
+  html.deck-on .slide--glass .story,
+  html.deck-on .slide--glass .works,
+  html.deck-on .slide--glass .tour,
+  html.deck-on .slide--glass .offer,
+  html.deck-on .slide--glass .foot{ background:transparent; }
+  html.deck-on .slide--glass .story__band{ background:rgba(240,220,214,.62); }
 
-/* ── Navegación lateral por secciones ───── */
-.dots{
-  display:none;
-  position:fixed; right:24px; top:50%; z-index:65;
-  transform:translateY(-50%);
-  flex-direction:column; align-items:flex-end; gap:6px;
-  transition:opacity .4s ease, visibility .4s;
-}
-html.deck-on .dots{ display:flex; }
+  /* ── Scroll interno de cada sección ─────── */
+  html.deck-on .slide__scroll{
+    position:relative; z-index:1;
+    height:100%;
+    overflow-y:auto; overflow-x:hidden;
+    overscroll-behavior:contain;
+    -webkit-overflow-scrolling:touch;
+    scrollbar-width:none;
+    -ms-overflow-style:none;
+    display:flex; flex-direction:column;
+  }
+  html.deck-on .slide__scroll::-webkit-scrollbar{ width:0; height:0; }
 
-.dots__dot{
-  display:flex; align-items:center; gap:11px;
-  padding:7px 0; border:0; background:none; cursor:pointer;
-  color:var(--tinta-soft);
-  transition:color .6s ease;
-}
-.dots__dot-line{
-  display:block; width:17px; height:1px;
-  background:currentColor; opacity:.4;
-  transition:width .5s cubic-bezier(.22,.61,.36,1), opacity .5s ease;
-}
-.dots__dot.is-on .dots__dot-line{ width:34px; opacity:1; }
-.dots__dot-label{
-  order:-1;
-  font-family:var(--sans);
-  font-size:9px; font-weight:400;
-  letter-spacing:.24em; text-transform:uppercase;
-  white-space:nowrap;
-  opacity:0; transform:translateX(8px);
-  transition:opacity .45s ease, transform .45s ease;
-}
-/* El nombre aparece sólo al pasar por encima: la sección activa ya se
-   reconoce por la raya larga, y así no molesta sobre las fotos. */
-.dots__dot:hover .dots__dot-label{ opacity:.9; transform:none; }
-.dots__dot:hover .dots__dot-line{ opacity:1; }
+  /* La sección crece hasta llenar la pantalla y su contenido queda centrado;
+     si es más alta, simplemente se desplaza por dentro. */
+  html.deck-on .slide__scroll > section{
+    flex:1 0 auto;
+    display:flex; flex-direction:column; justify-content:center;
+    min-height:0;
+  }
+  html.deck-on .slide__scroll > footer{ flex:0 0 auto; }
 
-/* Sobre las secciones con foto, la navegación pasa a blanco */
-html.slide-dark .dots__dot{ color:#fff; }
-html.slide-dark .dots__dot-label{ text-shadow:0 1px 12px rgba(60,48,45,.6); }
+  /* El hero mantiene su tarjeta centrada y deja ver la línea de "bajar" */
+  html.deck-on .slide--hero .hero{
+    flex-direction:row;
+    align-items:center;
+    overflow:visible;
+  }
 
-/* ── Botón de avance ────────────────────── */
-.deck__next{
-  display:none;
-  position:fixed; left:50%; bottom:26px; z-index:65;
-  transform:translateX(-50%);
-  width:46px; height:46px;
-  border:0; border-radius:999px;
-  background:none; cursor:pointer;
-  color:var(--tinta-soft);
-  transition:opacity .5s ease, visibility .5s, color .6s ease;
-}
-html.deck-on .deck__next{ display:block; }
-.deck__next span{
-  display:block; width:11px; height:11px; margin:0 auto;
-  border-right:1px solid currentColor;
-  border-bottom:1px solid currentColor;
-  transform:rotate(45deg);
-  animation:deckNext 2.4s ease-in-out infinite;
-}
-@keyframes deckNext{
-  0%,100%{ transform:rotate(45deg) translate(0,0); opacity:.55; }
-  50%    { transform:rotate(45deg) translate(3px,3px); opacity:1; }
-}
-html.slide-dark .deck__next{ color:#fff; }
+  html.deck-on .works{ padding-top:clamp(70px,10vw,110px); }
+  html.deck-on .tour .step:last-of-type{ margin-bottom:clamp(50px,7vw,80px); }
 
-.deck__next.is-off,
-.dots.is-off{ opacity:0; visibility:hidden; pointer-events:none; }
+  /* ── Navegación lateral por secciones ───── */
+  html.deck-on .dots{
+    display:flex;
+    position:fixed; right:24px; top:50%; z-index:65;
+    transform:translateY(-50%);
+    flex-direction:column; align-items:flex-end; gap:6px;
+    transition:opacity .4s ease, visibility .4s;
+  }
 
-/* El menú de celular tapa todo lo demás */
-html.menu-abierto .dots,
-html.menu-abierto .deck__next,
-html.menu-abierto .wa-float{ opacity:0; visibility:hidden; pointer-events:none; }
+  .dots__dot{
+    display:flex; align-items:center; gap:11px;
+    padding:7px 0; border:0; background:none; cursor:pointer;
+    color:var(--tinta-soft);
+    transition:color .6s ease;
+  }
+  .dots__dot-line{
+    display:block; width:17px; height:1px;
+    background:currentColor; opacity:.4;
+    transition:width .5s cubic-bezier(.22,.61,.36,1), opacity .5s ease;
+  }
+  .dots__dot.is-on .dots__dot-line{ width:34px; opacity:1; }
+  .dots__dot-label{
+    order:-1;
+    font-family:var(--sans);
+    font-size:9px; font-weight:400;
+    letter-spacing:.24em; text-transform:uppercase;
+    white-space:nowrap;
+    opacity:0; transform:translateX(8px);
+    transition:opacity .45s ease, transform .45s ease;
+  }
+  /* El nombre aparece sólo al pasar por encima: la sección activa ya se
+     reconoce por la raya larga, y así no molesta sobre las fotos. */
+  .dots__dot:hover .dots__dot-label{ opacity:.9; transform:none; }
+  .dots__dot:hover .dots__dot-line{ opacity:1; }
 
-@media (max-width:900px){
-  .dots{ right:14px; gap:2px; }
-  .dots__dot-label{ display:none; }
-  .dots__dot-line{ width:13px; }
-  .dots__dot.is-on .dots__dot-line{ width:26px; }
-  .deck__next{ bottom:16px; }
+  /* Sobre las secciones con foto, la navegación pasa a blanco */
+  html.slide-dark .dots__dot{ color:#fff; }
+
+  /* ── Botón de avance ────────────────────── */
+  html.deck-on .deck__next{
+    display:block;
+    position:fixed; left:50%; bottom:26px; z-index:65;
+    transform:translateX(-50%);
+    width:46px; height:46px;
+    border:0; border-radius:999px;
+    background:none; cursor:pointer;
+    color:var(--tinta-soft);
+    transition:opacity .5s ease, visibility .5s, color .6s ease;
+  }
+  .deck__next span{
+    display:block; width:11px; height:11px; margin:0 auto;
+    border-right:1px solid currentColor;
+    border-bottom:1px solid currentColor;
+    transform:rotate(45deg);
+    animation:deckNext 2.4s ease-in-out infinite;
+  }
+  @keyframes deckNext{
+    0%,100%{ transform:rotate(45deg) translate(0,0); opacity:.55; }
+    50%    { transform:rotate(45deg) translate(3px,3px); opacity:1; }
+  }
+  html.slide-dark .deck__next{ color:#fff; }
+
+  html.deck-on .deck__next.is-off,
+  html.deck-on .dots.is-off{ opacity:0; visibility:hidden; pointer-events:none; }
+
+  /* El menú de celular tapa todo lo demás */
+  html.menu-abierto .dots,
+  html.menu-abierto .deck__next,
+  html.menu-abierto .wa-float{ opacity:0; visibility:hidden; pointer-events:none; }
+
+  @media (prefers-reduced-motion:reduce){
+    html.deck-on .slide{ transition:none; }
+    .deck__next span{ animation:none; }
+  }
 }
 
 @media (prefers-reduced-motion:reduce){
-  html.deck-on .slide{ transition:none; }
   .deck__bg img{ animation:none; }
-  .deck__next span{ animation:none; }
 }

@@ -11,7 +11,22 @@
   var wa     = document.querySelector('.wa-float');
   var deck   = document.getElementById('deck');
   var slides = deck ? [].slice.call(deck.querySelectorAll('.slide')) : [];
-  var modoDeck = !!(deck && slides.length > 1);
+
+  /* El deck de pantallas completas necesita una pantalla grande: hay
+     secciones (las invitaciones, el recorrido) que en un celular no
+     entran ni cerca. Ahí la página vuelve al scroll de siempre. */
+  var pantallaDeck = window.matchMedia('(min-width: 901px) and (min-height: 620px)');
+  var modoDeck = !!(deck && slides.length > 1 && pantallaDeck.matches);
+
+  /* Si se cruza ese límite (agrandar la ventana, rotar la tablet) se
+     rearma la página en el modo que corresponde. */
+  if (deck && pantallaDeck.addEventListener) {
+    var relojModo = null;
+    pantallaDeck.addEventListener('change', function () {
+      clearTimeout(relojModo);
+      relojModo = setTimeout(function () { window.location.reload(); }, 350);
+    });
+  }
 
 
   /* ══════════════════════════════════════════
