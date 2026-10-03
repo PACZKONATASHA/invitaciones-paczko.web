@@ -905,12 +905,12 @@ html.zoom-abierto, html.zoom-abierto body{ overflow:hidden; }
   max-width:940px; margin:0 auto clamp(80px,11vw,130px);
   padding:0 var(--gutter);
   display:grid;
-  grid-template-columns:minmax(0,440px) minmax(230px,285px);
+  grid-template-columns:minmax(0,440px) minmax(190px,235px);
   justify-content:center;
   align-items:center;
   gap:clamp(36px,6vw,80px);
 }
-.step--alt{ grid-template-columns:minmax(230px,285px) minmax(0,440px); }
+.step--alt{ grid-template-columns:minmax(190px,235px) minmax(0,440px); }
 .step--alt .step__text{ order:2; }
 .step--alt .step__device{ order:1; }
 
@@ -944,18 +944,18 @@ html.zoom-abierto, html.zoom-abierto body{ overflow:hidden; }
 /* ── Mockup de celular ──────────────────── */
 .phone{
   position:relative;
-  width:100%; max-width:300px;
+  width:100%; max-width:235px;
   aspect-ratio:9/18.6;
   background:#241c1b;
-  border-radius:44px;
-  padding:11px;
+  border-radius:38px;
+  padding:9px;
   box-shadow:
     0 0 0 1px rgba(255,255,255,.14) inset,
     0 40px 70px -38px rgba(60,48,45,.75);
 }
 .phone__notch{
-  position:absolute; top:11px; left:50%; transform:translateX(-50%);
-  width:38%; height:22px;
+  position:absolute; top:9px; left:50%; transform:translateX(-50%);
+  width:38%; height:18px;
   background:#241c1b;
   border-radius:0 0 14px 14px;
   z-index:4;
@@ -963,7 +963,7 @@ html.zoom-abierto, html.zoom-abierto body{ overflow:hidden; }
 .phone__screen{
   position:relative;
   width:100%; height:100%;
-  border-radius:34px;
+  border-radius:30px;
   overflow:hidden;
   background:#000;
 }
@@ -1078,6 +1078,8 @@ html.zoom-abierto, html.zoom-abierto body{ overflow:hidden; }
   .step--alt .step__text{ order:1; }
   .step--alt .step__device{ order:2; }
   .step__desc{ margin:0 auto; }
+  /* En el celular, los mockups más chicos para que no tapen toda la pantalla */
+  .phone{ max-width:210px; }
 }
 
 /* ══════════════ 5 · LO QUE OFRECEMOS ══════════════ */
