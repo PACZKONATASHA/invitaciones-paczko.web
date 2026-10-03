@@ -251,7 +251,11 @@
     /* ── Teclado ── */
     document.addEventListener('keydown', function (e) {
       if (raiz.classList.contains('menu-abierto')) return;
+      // Con el visor abierto, las flechas pasan de diseño (ver punto 8).
+      if (raiz.classList.contains('zoom-abierto')) return;
       if (e.metaKey || e.ctrlKey || e.altKey) return;
+      // Mientras se completa el formulario, las teclas son para escribir.
+      if (e.target.closest && e.target.closest('input, textarea, select')) return;
 
       switch (e.key) {
         case 'ArrowDown':
@@ -367,40 +371,44 @@
 
 
   /* ══════════════════════════════════════════
-     4 · Paso 02: el video se reproduce al ver la sección
+     4 · Videos (paso 02 y la frase final):
+         se reproducen sólo al ver su sección
      ══════════════════════════════════════════ */
-  var video       = document.getElementById('tourVideo');
-  var btnSonido   = document.getElementById('tourSound');
-  var iconoSonido = document.getElementById('tourSoundIcon');
+  var video         = document.getElementById('tourVideo');
+  var videoHistoria = document.getElementById('storyVideo');
+  var btnSonido     = document.getElementById('tourSound');
+  var iconoSonido   = document.getElementById('tourSoundIcon');
 
-  function reproducir() {
-    if (!video) return;
-    var p = video.play();
+  function reproducir(v) {
+    var p = v.play();
     if (p && p.catch) p.catch(function () {});
   }
 
-  if (video) {
-    var slideVideo = video.closest('.slide');
+  function reproducirAlVer(v) {
+    var slideVideo = v.closest('.slide');
 
     if (modoDeck && slideVideo) {
-      slideVideo.addEventListener('slide:enter', reproducir);
-      slideVideo.addEventListener('slide:leave', function () { video.pause(); });
-      if (slideVideo.classList.contains('is-active')) reproducir();
+      slideVideo.addEventListener('slide:enter', function () { reproducir(v); });
+      slideVideo.addEventListener('slide:leave', function () { v.pause(); });
+      if (slideVideo.classList.contains('is-active')) reproducir(v);
     } else if ('IntersectionObserver' in window) {
       var obsVideo = new IntersectionObserver(function (entradas) {
         entradas.forEach(function (e) {
-          if (e.isIntersecting) reproducir(); else video.pause();
+          if (e.isIntersecting) reproducir(v); else v.pause();
         });
       }, { threshold: 0.45 });
-      obsVideo.observe(video);
+      obsVideo.observe(v);
     }
   }
+
+  if (video) reproducirAlVer(video);
+  if (videoHistoria) reproducirAlVer(videoHistoria);
 
   if (btnSonido && video) {
     btnSonido.addEventListener('click', function () {
       video.muted = !video.muted;
       iconoSonido.textContent = video.muted ? '🔇' : '🔊';
-      if (!video.muted) reproducir();
+      if (!video.muted) reproducir(video);
     });
   }
 
@@ -473,4 +481,243 @@
       obsTarjeta.observe(tarjeta);
     }
   }
+
+
+  /* ══════════════════════════════════════════
+     6 · Formulario: arma el mensaje con todos
+         los datos y lo abre en WhatsApp
+     ══════════════════════════════════════════ */
+  var form      = document.getElementById('orderForm');
+  var errorForm = document.getElementById('orderError');
+  var WHATSAPP  = '5493786417162';
+
+  function valor(nombre) {
+    var campo = form.elements[nombre];
+    return campo ? campo.value.trim() : '';
+  }
+
+  // "2026-08-30" → "domingo 30 de agosto de 2026"
+  function fechaLarga(iso) {
+    if (!iso) return '';
+    var d = new Date(iso + 'T12:00:00');
+    if (isNaN(d)) return iso;
+    return d.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+  }
+
+  if (form) {
+    form.addEventListener('input', function (e) {
+      var campo = e.target.closest('.field');
+      if (campo && e.target.value.trim()) campo.classList.remove('is-error');
+    });
+
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+
+      var faltan = [].filter.call(form.querySelectorAll('[required]'), function (c) {
+        var vacio = !c.value.trim();
+        c.closest('.field').classList.toggle('is-error', vacio);
+        return vacio;
+      });
+
+      errorForm.hidden = !faltan.length;
+      if (faltan.length) { faltan[0].focus(); return; }
+
+      var horario = valor('desde') && valor('hasta')
+        ? 'De ' + valor('desde') + ' a ' + valor('hasta') + ' hs'
+        : (valor('desde') ? 'Desde las ' + valor('desde') + ' hs' : '');
+
+      var filas = [
+        ['Evento',     valor('tipo')],
+        ['Mi nombre',  valor('cliente')],
+        ['Nombre',     valor('nombre')],
+        ['Edad',       valor('edad') ? valor('edad') + ' años' : ''],
+        ['Fecha',      fechaLarga(valor('fecha'))],
+        ['Horario',    horario],
+        ['Lugar',      valor('lugar')],
+        ['Dirección',  valor('direccion')],
+        ['Temática',   valor('tematica')],
+        ['Colores',    valor('colores')],
+        ['Canción',    valor('cancion')],
+        ['Video',      valor('video')],
+        ['Comentarios', valor('mensaje')]
+      ];
+
+      var texto = '¡Hola! Quiero hacer una invitación digital personalizada ✨\n\n' +
+        filas.filter(function (f) { return f[1]; })
+             .map(function (f) { return '*' + f[0] + ':* ' + f[1]; })
+             .join('\n');
+
+      window.location.href = 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(texto);
+    });
+  }
+
+
+  /* ══════════════════════════════════════════
+     7 · Diseños: "Quiero una así" lleva al
+         formulario con el evento, la temática
+         y los colores del diseño ya cargados
+     ══════════════════════════════════════════ */
+  var ideas = document.getElementById('ideas');
+
+  // El salto al formulario lo resuelve el enlace (o el deck); acá sólo se cargan los datos.
+  function cargarIdea(idea) {
+    if (!form) return;
+    ['tipo', 'tematica', 'colores'].forEach(function (nombre) {
+      var dato  = idea.getAttribute('data-' + nombre);
+      var campo = form.elements[nombre];
+      if (!dato || !campo) return;
+
+      campo.value = dato;
+      var caja = campo.closest('.field');
+      caja.classList.remove('is-error', 'is-sugerido');
+      void caja.offsetWidth;   // así el destello se repite si eligen otro diseño
+      caja.classList.add('is-sugerido');
+    });
+  }
+
+  if (ideas) {
+    ideas.addEventListener('click', function (e) {
+      var enlace = e.target.closest('a[href="#formulario"]');
+      var idea   = enlace && enlace.closest('.idea');
+      if (idea) cargarIdea(idea);
+    });
+  }
+
+
+  /* ══════════════════════════════════════════
+     8 · Visor: al tocar una portada se abre
+         en grande, con flechas (o deslizando
+         el dedo) para pasar al diseño de al lado
+     ══════════════════════════════════════════ */
+  var zoom = document.getElementById('zoom');
+
+  if (ideas && zoom) {
+    var tarjetas    = [].slice.call(ideas.querySelectorAll('.idea'));
+    var escenario   = document.getElementById('zoomStage');
+    var zoomTipo    = document.getElementById('zoomType');
+    var zoomNombre  = document.getElementById('zoomName');
+    var zoomDesc    = document.getElementById('zoomDesc');
+    var zoomCta     = document.getElementById('zoomCta');
+    var zoomCerrar  = zoom.querySelector('.zoom__close');
+    var enZoom      = 0;
+    var antesDeZoom = null;   // lo que tenía el foco, para devolvérselo al cerrar
+    var relojZoom   = null;
+
+    var textoDe = function (idea, sel) {
+      var el = idea.querySelector(sel);
+      return el ? el.textContent : '';
+    };
+
+    var mostrarZoom = function (n) {
+      enZoom = (n + tarjetas.length) % tarjetas.length;
+      var idea   = tarjetas[enZoom];
+      var nombre = textoDe(idea, '.idea__name');
+
+      // La copia es sólo para mirar: va en un <div>, sin el rótulo del hover
+      // y sin ids repetidos (los <use> del SVG siguen apuntando a la galería).
+      var copia = document.createElement('div');
+      copia.className = idea.querySelector('.idea__cover').className;
+      copia.innerHTML = idea.querySelector('.idea__cover').innerHTML;
+      copia.setAttribute('role', 'img');
+      copia.setAttribute('aria-label', 'Diseño ' + nombre);
+      [].forEach.call(copia.querySelectorAll('.idea__hover'), function (el) { el.remove(); });
+      [].forEach.call(copia.querySelectorAll('[id]'), function (el) { el.removeAttribute('id'); });
+      [].forEach.call(copia.querySelectorAll('img'), function (el) { el.removeAttribute('loading'); });
+
+      escenario.innerHTML = '';
+      escenario.appendChild(copia);
+      zoomTipo.textContent   = textoDe(idea, '.idea__type');
+      zoomNombre.textContent = nombre;
+      zoomDesc.textContent   = textoDe(idea, '.idea__desc');
+      zoomCta.setAttribute('aria-label', 'Quiero una invitación como el diseño ' + nombre);
+    };
+
+    var abrirZoom = function (n) {
+      antesDeZoom = document.activeElement;
+      mostrarZoom(n);
+      clearTimeout(relojZoom);
+      zoom.hidden = false;
+      raiz.classList.add('zoom-abierto');
+      void zoom.offsetWidth;   // así arranca el fundido
+      zoom.classList.add('is-open');
+      zoomCerrar.focus({ preventScroll: true });
+    };
+
+    var cerrarZoom = function (devolverFoco) {
+      if (zoom.hidden) return;
+      zoom.classList.remove('is-open');
+      raiz.classList.remove('zoom-abierto');
+      relojZoom = setTimeout(function () {
+        zoom.hidden = true;
+        escenario.innerHTML = '';
+      }, suave ? 350 : 0);
+      if (devolverFoco && antesDeZoom && antesDeZoom.focus) antesDeZoom.focus({ preventScroll: true });
+    };
+
+    tarjetas.forEach(function (idea, n) {
+      idea.querySelector('.idea__cover').addEventListener('click', function () { abrirZoom(n); });
+    });
+
+    [].forEach.call(zoom.querySelectorAll('[data-zoom-cerrar]'), function (el) {
+      el.addEventListener('click', function () { cerrarZoom(true); });
+    });
+    document.getElementById('zoomPrev').addEventListener('click', function () { mostrarZoom(enZoom - 1); });
+    document.getElementById('zoomNext').addEventListener('click', function () { mostrarZoom(enZoom + 1); });
+
+    // "Quiero una así": carga los datos, cierra el visor y el enlace sigue al formulario.
+    zoomCta.addEventListener('click', function () {
+      cargarIdea(tarjetas[enZoom]);
+      cerrarZoom(false);
+    });
+
+    document.addEventListener('keydown', function (e) {
+      if (zoom.hidden) return;
+
+      if (e.key === 'Escape')     { cerrarZoom(true); return; }
+      if (e.key === 'ArrowLeft')  { e.preventDefault(); mostrarZoom(enZoom - 1); return; }
+      if (e.key === 'ArrowRight') { e.preventDefault(); mostrarZoom(enZoom + 1); return; }
+
+      // El Tab da vueltas adentro del visor
+      if (e.key === 'Tab') {
+        var focos   = zoom.querySelectorAll('button, a[href]');
+        var primero = focos[0];
+        var ultimo  = focos[focos.length - 1];
+        if (!zoom.contains(document.activeElement)) { e.preventDefault(); primero.focus(); }
+        else if (e.shiftKey && document.activeElement === primero) { e.preventDefault(); ultimo.focus(); }
+        else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primero.focus(); }
+      }
+    });
+
+    /* Deslizar con el dedo pasa de diseño; mientras tanto la página
+       de atrás no se mueve (con dos dedos se puede seguir haciendo zoom). */
+    var zX = 0, zY = 0, zUnDedo = false;
+
+    zoom.addEventListener('touchstart', function (e) {
+      zUnDedo = e.touches.length === 1;
+      if (!zUnDedo) return;
+      zX = e.touches[0].clientX;
+      zY = e.touches[0].clientY;
+    }, { passive: true });
+
+    zoom.addEventListener('touchmove', function (e) {
+      if (e.touches.length === 1) e.preventDefault();
+      else zUnDedo = false;
+    }, { passive: false });
+
+    zoom.addEventListener('touchend', function (e) {
+      if (!zUnDedo || e.touches.length) return;
+      zUnDedo = false;
+      var t  = e.changedTouches[0];
+      var dx = t.clientX - zX;
+      var dy = t.clientY - zY;
+      if (Math.abs(dx) > 50 && Math.abs(dx) > Math.abs(dy)) mostrarZoom(enZoom + (dx < 0 ? 1 : -1));
+    }, { passive: true });
+  }
+
+
+  /* ══════════════════════════════════════════
+     9 · Footer: el año del © siempre al día
+     ══════════════════════════════════════════ */
+  var anio = document.getElementById('footYear');
+  if (anio) anio.textContent = new Date().getFullYear();
 })();

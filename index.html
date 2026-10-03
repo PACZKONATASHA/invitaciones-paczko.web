@@ -8,7 +8,8 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&display=swap" rel="stylesheet">
+<!-- Cinzel, Fredoka y Great Vibes: sólo para las portadas de la sección Ideas -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;1,400;1,500&family=Jost:wght@300;400;500&family=Cinzel:wght@400;500&family=Fredoka:wght@500;600&family=Great+Vibes&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="styles.css">
 </head>
 <body>
@@ -27,7 +28,10 @@
   <nav class="nav__links" id="navMenu">
     <a href="#trabajos">Invitaciones</a>
     <a href="#recorrido">Recorrido</a>
+    <a href="#ideas">Diseños</a>
     <a href="#ofrecemos">Lo que ofrecemos</a>
+    <a href="#precios">Precios</a>
+    <a href="#formulario">Pedí la tuya</a>
     <a href="#contacto" class="nav__cta">Escribinos</a>
   </nav>
 </header>
@@ -38,7 +42,7 @@
 
   <!-- Fondo del hero: queda fijo detrás de todas las secciones -->
   <div class="deck__bg" aria-hidden="true">
-    <img src="img/hero.jpg" alt="">
+    <img src="img/hero-hd.jpg" alt="" width="1911" height="2043" fetchpriority="high" decoding="async">
     <span class="deck__bg-veil"></span>
   </div>
 
@@ -53,36 +57,9 @@
           <p class="hero__sub">Personalizadas</p>
         </div>
 
-        <a href="#historia" class="hero__scroll" aria-label="Bajar">
+        <a href="#trabajos" class="hero__scroll" aria-label="Bajar">
           <span class="hero__scroll-line"></span>
         </a>
-      </section>
-    </div>
-  </div>
-
-  <div class="slide slide--glass" data-id="historia" data-label="Historia">
-    <div class="slide__scroll">
-      <!-- ══════════════ 1 · LA FRASE ══════════════ -->
-      <section class="story" id="historia">
-        <div class="story__band"></div>
-
-
-        <div class="story__inner">
-
-          <div class="story__stage reveal">
-            <!-- Contorno desplazado: el mismo recurso de marco fino de la tarjeta del hero -->
-            <span class="story__arch" aria-hidden="true"></span>
-
-            <figure class="story__photo">
-              <img src="img/mi-foto.jpg" alt="Natasha, diseñadora de las invitaciones">
-            </figure>
-          </div>
-
-          <p class="story__quote reveal">
-            <span class="story__comilla">“</span>Cada invitación está pensada<br>
-            <em>para contar una historia.</em><span class="story__comilla">”</span>
-          </p>
-        </div>
       </section>
     </div>
   </div>
@@ -92,7 +69,6 @@
       <!-- ══════════════ 2 · GALERÍA ══════════════ -->
       <section class="works" id="trabajos">
         <header class="sec-head reveal">
-          <span class="sec-head__eyebrow">portfolio</span>
           <h2 class="sec-head__title">Nuestras invitaciones</h2>
         </header>
 
@@ -174,10 +150,10 @@
         <div class="claim__inner reveal">
           <span class="claim__eyebrow">¿qué las hace diferentes?</span>
           <p class="claim__text">
-            No usamos plantillas.<br>
-            Las diseñamos <em>100% nosotros</em>,<br>
+            No son plantillas,<br>
+            son <em>diseños personalizados</em>,<br>
             en base a la temática<br>
-            y a tus gustos personales.
+            y a tus gustos.
           </p>
         </div>
       </section>
@@ -282,12 +258,380 @@
                 </div>
               </div>
             </div>
-            <span class="step__tag">Tarjeta · datos · RSVP</span>
+            <span class="step__tag">Tarjeta · datos · confirmación</span>
           </div>
         </div>
 
         <div class="tour__foot reveal">
           <a class="btn-ghost" href="https://invitacion-digital-maia.vercel.app" target="_blank" rel="noopener">Ver esta invitación completa</a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div class="slide slide--glass" data-id="ideas" data-label="Diseños">
+    <div class="slide__scroll">
+      <!-- ══════════════ DISEÑOS · ESTILOS PARA INSPIRARSE ══════════════
+           Portadas de muestra dibujadas en CSS + SVG; algunas son fotos
+           (img/ideas).
+           Al tocar una portada se abre en grande (visor al final de la
+           página). "Quiero una así" lleva al formulario con el evento,
+           la temática y los colores del diseño ya cargados (ver script.js). -->
+      <section class="ideas" id="ideas">
+        <header class="sec-head reveal">
+          <span class="sec-head__eyebrow">inspiración</span>
+          <h2 class="sec-head__title">Un poco más de<br>nuestros diseños</h2>
+          <p class="sec-head__note">Algunos estilos para que imagines la tuya: tocá cualquiera para verla en grande. Elegí el que más te guste y lo diseñamos desde cero, con tu temática, tus colores y tus datos.</p>
+        </header>
+
+        <div class="ideas__grid">
+
+          <!-- Arcoíris · infantil -->
+          <article class="idea reveal" data-tipo="Cumpleaños infantil" data-tematica="Como el diseño «Arcoíris»: pastel, con nubes y confeti" data-colores="Pasteles: coral, amarillo y celeste">
+            <button class="idea__cover cv--arcoiris" type="button" aria-label="Ver en grande el diseño Arcoíris">
+              <svg class="cv__art" viewBox="0 0 90 160">
+                <g fill="none" stroke-width="5">
+                  <path d="M15 64A30 30 0 0 1 75 64" stroke="#F4A9A0"/>
+                  <path d="M20 64A25 25 0 0 1 70 64" stroke="#F8C99C"/>
+                  <path d="M25 64A20 20 0 0 1 65 64" stroke="#F5E1A0"/>
+                  <path d="M30 64A15 15 0 0 1 60 64" stroke="#BCDFC2"/>
+                  <path d="M35 64A10 10 0 0 1 55 64" stroke="#AED3EC"/>
+                </g>
+                <g fill="#EBDDC8">
+                  <circle cx="12.5" cy="67.2" r="6.5"/><circle cx="20" cy="61.2" r="8.5"/><circle cx="29.5" cy="63.2" r="7"/><circle cx="37.5" cy="67.7" r="5"/><rect x="9" y="66.2" width="33" height="7" rx="3.5"/>
+                  <circle cx="77.5" cy="67.2" r="6.5"/><circle cx="70" cy="61.2" r="8.5"/><circle cx="60.5" cy="63.2" r="7"/><circle cx="52.5" cy="67.7" r="5"/><rect x="48" y="66.2" width="33" height="7" rx="3.5"/>
+                </g>
+                <g fill="#fff">
+                  <circle cx="12.5" cy="66" r="6.5"/><circle cx="20" cy="60" r="8.5"/><circle cx="29.5" cy="62" r="7"/><circle cx="37.5" cy="66.5" r="5"/><rect x="9" y="65" width="33" height="7" rx="3.5"/>
+                  <circle cx="77.5" cy="66" r="6.5"/><circle cx="70" cy="60" r="8.5"/><circle cx="60.5" cy="62" r="7"/><circle cx="52.5" cy="66.5" r="5"/><rect x="48" y="65" width="33" height="7" rx="3.5"/>
+                </g>
+                <circle cx="12" cy="18" r="1.1" fill="#F4A9A0"/><circle cx="25" cy="29" r=".8" fill="#AED3EC"/>
+                <circle cx="40" cy="15" r=".9" fill="#F5E1A0"/><circle cx="57" cy="21" r="1" fill="#BCDFC2"/>
+                <circle cx="73" cy="12" r=".8" fill="#F8C99C"/><circle cx="82" cy="33" r="1.1" fill="#AED3EC"/>
+                <circle cx="7" cy="41" r=".8" fill="#F5E1A0"/><circle cx="84" cy="84" r=".9" fill="#F4A9A0"/>
+                <circle cx="6" cy="104" r=".9" fill="#BCDFC2"/><circle cx="85" cy="122" r=".8" fill="#F5E1A0"/>
+                <circle cx="12" cy="146" r="1" fill="#AED3EC"/><circle cx="77" cy="150" r="1.1" fill="#F4A9A0"/>
+                <circle cx="30" cy="153" r=".8" fill="#BCDFC2"/><circle cx="58" cy="155" r=".8" fill="#F8C99C"/>
+              </svg>
+              <span class="cv__txt">
+                <span class="cv__kicker">¡vení a festejar!</span>
+                <span class="cv__name">Lola</span>
+                <span class="cv__num">3<small>años</small></span>
+                <span class="cv__date">sáb 15 · 05 · 16 h</span>
+              </span>
+              <span class="idea__hover">Ver en grande</span>
+            </button>
+            <div class="idea__meta">
+              <span class="idea__type">Infantil</span>
+              <h3 class="idea__name">Arcoíris</h3>
+              <p class="idea__desc">Pastel, nubes y confeti</p>
+              <span class="idea__colors" role="img" aria-label="Colores: coral, amarillo y celeste pastel"><i style="--c:#F4A9A0"></i><i style="--c:#F5E1A0"></i><i style="--c:#AED3EC"></i></span>
+              <a class="idea__cta" href="#formulario" aria-label="Quiero una invitación como el diseño Arcoíris">Quiero una así</a>
+            </div>
+          </article>
+
+          <!-- Dinosaurios · infantil -->
+          <article class="idea reveal" data-tipo="Cumpleaños infantil" data-tematica="Como el diseño «Dinosaurios»: selva jurásica con dinosaurios" data-colores="Verde selva, naranja atardecer y piedra">
+            <button class="idea__cover cv--dinos" type="button" aria-label="Ver en grande el diseño Dinosaurios">
+              <img class="cv__foto" src="img/ideas/dinosaurios.jpg" alt="" width="283" height="457" loading="lazy" decoding="async">
+              <span class="idea__hover">Ver en grande</span>
+            </button>
+            <div class="idea__meta">
+              <span class="idea__type">Infantil</span>
+              <h3 class="idea__name">Dinosaurios</h3>
+              <p class="idea__desc">Selva jurásica y dinos</p>
+              <span class="idea__colors" role="img" aria-label="Colores: verde selva, naranja atardecer y piedra"><i style="--c:#3E6B35"></i><i style="--c:#F0A04B"></i><i style="--c:#8A7A66"></i></span>
+              <a class="idea__cta" href="#formulario" aria-label="Quiero una invitación como el diseño Dinosaurios">Quiero una así</a>
+            </div>
+          </article>
+
+          <!-- Circo · infantil -->
+          <article class="idea reveal" data-tipo="Cumpleaños infantil" data-tematica="Como el diseño «Circo»: carpa a rayas y banderines" data-colores="Rojo, mostaza y azul">
+            <button class="idea__cover cv--circo" type="button" aria-label="Ver en grande el diseño Circo">
+              <svg class="cv__art" viewBox="0 0 90 160">
+                <defs>
+                  <pattern id="cq-rayas" x="3" width="8" height="8" patternUnits="userSpaceOnUse">
+                    <rect width="4" height="8" fill="#D8524A"/>
+                    <rect x="4" width="4" height="8" fill="#FBF3E4"/>
+                  </pattern>
+                </defs>
+                <path d="M-2 18Q45 34 92 18" fill="none" stroke="#2E4057" stroke-width=".45"/>
+                <path d="M2 19.3 10 21.56 6 29.5Z" fill="#D8524A"/>
+                <path d="M12 22.06 20 23.74 16 31.95Z" fill="#E9B44C"/>
+                <path d="M22 24.08 30 25.19 26 33.7Z" fill="#2E4057"/>
+                <path d="M32 25.39 40 25.91 36 34.7Z" fill="#4F9D9A"/>
+                <path d="M42 25.97 50 25.91 46 35Z" fill="#D8524A"/>
+                <path d="M52 25.82 60 25.19 56 34.56Z" fill="#E9B44C"/>
+                <path d="M62 24.95 70 23.74 66 33.4Z" fill="#2E4057"/>
+                <path d="M72 23.36 80 21.56 76 31.5Z" fill="#4F9D9A"/>
+                <path d="M82 21.04 90 18.67 86 28.9Z" fill="#D8524A"/>
+                <circle cx="8" cy="48" r=".9" fill="#E9B44C"/><circle cx="83" cy="45" r="1" fill="#4F9D9A"/>
+                <circle cx="13" cy="74" r=".8" fill="#D8524A"/><circle cx="79" cy="77" r=".9" fill="#E9B44C"/>
+                <circle cx="6" cy="100" r="1" fill="#4F9D9A"/><circle cx="85" cy="104" r=".8" fill="#D8524A"/>
+                <path d="M45 99V91.5" stroke="#2E4057" stroke-width=".6"/>
+                <path d="M45 91.5 52 93.5 45 95.5Z" fill="#E9B44C"/>
+                <rect x="19" y="127" width="52" height="35" fill="url(#cq-rayas)"/>
+                <path d="M45 99 76.5 128H13.5Z" fill="#D8524A"/>
+                <path d="M45 99 20.5 128H27.5ZM45 99 34.5 128H41.5ZM45 99 48.5 128H55.5ZM45 99 62.5 128H69.5Z" fill="#FBF3E4"/>
+                <path d="M13.5 128Q17 132.5 20.5 128 24 132.5 27.5 128 31 132.5 34.5 128 38 132.5 41.5 128 45 132.5 48.5 128 52 132.5 55.5 128 59 132.5 62.5 128 66 132.5 69.5 128 73 132.5 76.5 128Z" fill="#E9B44C"/>
+                <path d="M39 162V147Q45 140 51 147V162Z" fill="#2E4057"/>
+              </svg>
+              <span class="cv__txt">
+                <span class="cv__kicker">¡pasen y vean!</span>
+                <span class="cv__name">Simón</span>
+                <span class="cv__sub">cumple 4 años</span>
+                <span class="cv__date">dom 21 · 03 · 16 h</span>
+              </span>
+              <span class="idea__hover">Ver en grande</span>
+            </button>
+            <div class="idea__meta">
+              <span class="idea__type">Infantil</span>
+              <h3 class="idea__name">Circo</h3>
+              <p class="idea__desc">Carpa a rayas y banderines</p>
+              <span class="idea__colors" role="img" aria-label="Colores: rojo, mostaza y azul"><i style="--c:#D8524A"></i><i style="--c:#E9B44C"></i><i style="--c:#2E4057"></i></span>
+              <a class="idea__cta" href="#formulario" aria-label="Quiero una invitación como el diseño Circo">Quiero una así</a>
+            </div>
+          </article>
+
+          <!-- Gala · 15 años -->
+          <article class="idea reveal" data-tipo="Cumpleaños de 15" data-tematica="Como el diseño «Gala»: con tu foto, brillos y detalles dorados" data-colores="Rosa, dorado y champagne">
+            <button class="idea__cover cv--gala" type="button" aria-label="Ver en grande el diseño Gala">
+              <img class="cv__foto" src="img/ideas/gala.jpg" alt="" width="250" height="403" loading="lazy" decoding="async">
+              <span class="cv__txt">
+                <span class="cv__kicker">Mis</span>
+                <span class="cv__big">XV</span>
+                <span class="cv__name">Camila</span>
+                <span class="cv__rule"></span>
+                <span class="cv__date">21 · 03 · 2027</span>
+              </span>
+              <span class="idea__hover">Ver en grande</span>
+            </button>
+            <div class="idea__meta">
+              <span class="idea__type">15 años</span>
+              <h3 class="idea__name">Gala</h3>
+              <p class="idea__desc">Tu foto, brillos y dorado</p>
+              <span class="idea__colors" role="img" aria-label="Colores: rosa, dorado y champagne"><i style="--c:#E7B7B4"></i><i style="--c:#D9B77E"></i><i style="--c:#F3E6D3"></i></span>
+              <a class="idea__cta" href="#formulario" aria-label="Quiero una invitación como el diseño Gala">Quiero una así</a>
+            </div>
+          </article>
+
+          <!-- Primer añito · 1 año -->
+          <article class="idea reveal" data-tipo="Cumpleaños infantil" data-tematica="Como el diseño «Primer añito»: con tu foto, globos y flores en rosa y crema" data-colores="Rosa empolvado, crema y rose gold">
+            <button class="idea__cover cv--anito" type="button" aria-label="Ver en grande el diseño Primer añito">
+              <img class="cv__foto" src="img/ideas/primer-anito.jpg" alt="" width="720" height="1280" loading="lazy" decoding="async">
+              <span class="cv__txt">
+                <span class="cv__kicker">mi primer añito</span>
+                <span class="cv__name">Martina</span>
+                <span class="cv__date">sáb 14 · 03 · 16 h</span>
+              </span>
+              <span class="idea__hover">Ver en grande</span>
+            </button>
+            <div class="idea__meta">
+              <span class="idea__type">1 año</span>
+              <h3 class="idea__name">Primer añito</h3>
+              <p class="idea__desc">Tu foto, globos y flores</p>
+              <span class="idea__colors" role="img" aria-label="Colores: rosa empolvado, crema y rose gold"><i style="--c:#EBC3B5"></i><i style="--c:#F6EDE3"></i><i style="--c:#C99272"></i></span>
+              <a class="idea__cta" href="#formulario" aria-label="Quiero una invitación como el diseño Primer añito">Quiero una así</a>
+            </div>
+          </article>
+
+          <!-- Olivo · casamiento -->
+          <article class="idea reveal" data-tipo="Casamiento" data-tematica="Como el diseño «Olivo»: botánica, con ramas de olivo y letra caligráfica" data-colores="Verde oliva, crema y dorado">
+            <button class="idea__cover cv--olivo" type="button" aria-label="Ver en grande el diseño Olivo">
+              <svg class="cv__art" viewBox="0 0 90 160">
+                <defs>
+                  <path id="ol-hoja" d="M0 0C2.5-2.2 6.5-2.2 9 0 6.5 2.2 2.5 2.2 0 0Z"/>
+                  <g id="ol-rama">
+                    <path d="M0 0Q22-3 44-1" fill="none" stroke="#6F7D5B" stroke-width=".55" stroke-linecap="round"/>
+                    <use href="#ol-hoja" fill="#7E8C69" transform="translate(5 -.6) rotate(-40)"/>
+                    <use href="#ol-hoja" fill="#A1AC8A" transform="translate(8.5 -.9) rotate(38)"/>
+                    <use href="#ol-hoja" fill="#A1AC8A" transform="translate(13 -1.35) rotate(-38)"/>
+                    <use href="#ol-hoja" fill="#7E8C69" transform="translate(17 -1.57) rotate(36)"/>
+                    <use href="#ol-hoja" fill="#7E8C69" transform="translate(22 -1.75) rotate(-35)"/>
+                    <use href="#ol-hoja" fill="#A1AC8A" transform="translate(26 -1.8) rotate(33)"/>
+                    <use href="#ol-hoja" fill="#A1AC8A" transform="translate(31 -1.75) rotate(-31)"/>
+                    <use href="#ol-hoja" fill="#7E8C69" transform="translate(35 -1.6) rotate(29)"/>
+                    <use href="#ol-hoja" fill="#7E8C69" transform="translate(43.4 -1.1) rotate(-6)"/>
+                    <ellipse cx="15" cy="2.7" rx="1.25" ry="1.6" fill="#56613F"/>
+                    <ellipse cx="29.5" cy="3" rx="1.25" ry="1.6" fill="#56613F"/>
+                  </g>
+                </defs>
+                <rect x="5" y="5" width="80" height="150" fill="none" stroke="#C9B48A" stroke-width=".35"/>
+                <use href="#ol-rama" transform="translate(-4 46) rotate(-52) scale(1.1)"/>
+                <use href="#ol-rama" transform="translate(-5 24) rotate(-14) scale(.72)"/>
+                <g transform="rotate(180 45 80)">
+                  <use href="#ol-rama" transform="translate(-4 46) rotate(-52) scale(1.1)"/>
+                  <use href="#ol-rama" transform="translate(-5 24) rotate(-14) scale(.72)"/>
+                </g>
+              </svg>
+              <span class="cv__txt">
+                <span class="cv__kicker">nos casamos</span>
+                <span class="cv__name">Sofía <i>&amp;</i> Martín</span>
+                <span class="cv__date">14 · 11 · 2026</span>
+                <span class="cv__place">Quinta Los Aromos</span>
+              </span>
+              <span class="idea__hover">Ver en grande</span>
+            </button>
+            <div class="idea__meta">
+              <span class="idea__type">Casamiento</span>
+              <h3 class="idea__name">Olivo</h3>
+              <p class="idea__desc">Botánico y sereno</p>
+              <span class="idea__colors" role="img" aria-label="Colores: verde oliva, crema y dorado"><i style="--c:#7E8C69"></i><i style="--c:#F2EDE2"></i><i style="--c:#C9B48A"></i></span>
+              <a class="idea__cta" href="#formulario" aria-label="Quiero una invitación como el diseño Olivo">Quiero una así</a>
+            </div>
+          </article>
+
+          <!-- Medianoche · casamiento -->
+          <article class="idea reveal" data-tipo="Casamiento" data-tematica="Como el diseño «Medianoche»: noche elegante con detalles art déco dorados" data-colores="Azul noche, dorado y marfil">
+            <button class="idea__cover cv--medianoche" type="button" aria-label="Ver en grande el diseño Medianoche">
+              <svg class="cv__art" viewBox="0 0 90 160">
+                <defs>
+                  <g id="mn-abanico" stroke="#C9A86A" stroke-width=".35">
+                    <path d="M33 7A12 12 0 0 0 57 7Z" fill="#161C2B"/>
+                    <path d="M41 7A4 4 0 0 0 49 7" fill="none"/>
+                    <path d="M48.76 8.37 56.28 11.1M48.06 9.57 54.19 14.71M47 10.46 51 17.39M45.69 10.94 47.08 18.82M44.31 10.94 42.92 18.82M43 10.46 39 17.39M41.94 9.57 35.81 14.71M41.24 8.37 33.72 11.1" fill="none"/>
+                  </g>
+                  <path id="mn-brillo" d="M0-2 .45-.45 2 0 .45.45 0 2-.45.45-2 0-.45-.45Z"/>
+                </defs>
+                <path d="M13 7H77V10H80V13H83V147H80V150H77V153H13V150H10V147H7V13H10V10H13Z" fill="none" stroke="#C9A86A" stroke-width=".5"/>
+                <rect x="11" y="11" width="68" height="138" fill="none" stroke="#C9A86A" stroke-width=".25" opacity=".6"/>
+                <use href="#mn-abanico"/>
+                <use href="#mn-abanico" transform="rotate(180 45 80)"/>
+                <g class="cv__titila" fill="#D8BC85">
+                  <use href="#mn-brillo" transform="translate(21 32) scale(.9)"/>
+                  <use href="#mn-brillo" transform="translate(69 38) scale(.6)"/>
+                  <use href="#mn-brillo" transform="translate(63 127) scale(.8)"/>
+                  <use href="#mn-brillo" transform="translate(25 121) scale(.5)"/>
+                  <use href="#mn-brillo" transform="translate(72 106) scale(.45)"/>
+                  <use href="#mn-brillo" transform="translate(18 60) scale(.4)"/>
+                </g>
+              </svg>
+              <span class="cv__txt">
+                <span class="cv__kicker">nos casamos</span>
+                <span class="cv__name">Lucía <i>&amp;</i> Joaquín</span>
+                <span class="cv__date">05 · 12 · 2026</span>
+                <span class="cv__place">Salón Las Acacias</span>
+              </span>
+              <span class="idea__hover">Ver en grande</span>
+            </button>
+            <div class="idea__meta">
+              <span class="idea__type">Casamiento</span>
+              <h3 class="idea__name">Medianoche</h3>
+              <p class="idea__desc">Noche, dorado y art déco</p>
+              <span class="idea__colors" role="img" aria-label="Colores: azul noche, dorado y marfil"><i style="--c:#1A2133"></i><i style="--c:#C9A86A"></i><i style="--c:#EFE7D6"></i></span>
+              <a class="idea__cta" href="#formulario" aria-label="Quiero una invitación como el diseño Medianoche">Quiero una así</a>
+            </div>
+          </article>
+
+          <!-- Dulce espera · baby shower -->
+          <article class="idea reveal" data-tipo="Baby shower" data-tematica="Como el diseño «Dulce espera»: nubes, luna y estrellitas colgantes" data-colores="Celeste, durazno y crema">
+            <button class="idea__cover cv--dulce" type="button" aria-label="Ver en grande el diseño Dulce espera">
+              <svg class="cv__art" viewBox="0 0 90 160">
+                <defs>
+                  <path id="de-estrella" d="M0-1 .2645-.364.951-.309.428.139.588.809 0 .45-.588.809-.428.139-.951-.309-.2645-.364Z" stroke-linejoin="round"/>
+                </defs>
+                <g class="cv__flota">
+                  <path d="M18 -4V24.4M34 -4V35.6M52 -4V22M70 -4V31.6" stroke="#A9BCCD" stroke-width=".3"/>
+                  <use href="#de-estrella" fill="#F3CDA6" stroke="#F3CDA6" stroke-width=".3" transform="translate(18 28) scale(3.6)"/>
+                  <use href="#de-estrella" fill="#F6DDB0" stroke="#F6DDB0" stroke-width=".3" transform="translate(34 40) scale(4.4)"/>
+                  <path d="M0-5A5 5 0 0 0 0 5 6.5 6.5 0 0 1 0-5Z" fill="#F6DDB0" transform="translate(52 27.75) scale(1.15)"/>
+                  <use href="#de-estrella" fill="#F3CDA6" stroke="#F3CDA6" stroke-width=".3" transform="translate(70 35) scale(3.4)"/>
+                </g>
+                <g fill="#fff" opacity=".7">
+                  <circle cx="70" cy="64" r="3.4"/><circle cx="75.5" cy="61.5" r="4.4"/><circle cx="80.5" cy="64.5" r="3"/><rect x="67.5" y="63" width="16" height="4" rx="2"/>
+                  <circle cx="10" cy="118" r="3.6"/><circle cx="15" cy="115.5" r="4.6"/><circle cx="20.5" cy="118.5" r="3.2"/><rect x="7" y="117" width="17" height="4.2" rx="2.1"/>
+                </g>
+                <g fill="#F2DACD">
+                  <circle cx="14" cy="142" r="9"/><circle cx="34" cy="140" r="10"/><circle cx="52" cy="142" r="9"/><circle cx="70" cy="139" r="10"/><circle cx="86" cy="142" r="8"/>
+                </g>
+                <g fill="#fff">
+                  <circle cx="6" cy="150" r="12"/><circle cx="24" cy="145" r="10"/><circle cx="41" cy="151" r="11"/><circle cx="59" cy="146" r="12"/><circle cx="77" cy="150" r="11"/><circle cx="92" cy="145" r="9"/>
+                  <rect y="150" width="90" height="10"/>
+                </g>
+              </svg>
+              <span class="cv__txt">
+                <span class="cv__kicker">baby shower</span>
+                <span class="cv__name">Olivia</span>
+                <span class="cv__sub">te esperamos con amor</span>
+                <span class="cv__date">dom 18 · 10 · 16 h</span>
+              </span>
+              <span class="idea__hover">Ver en grande</span>
+            </button>
+            <div class="idea__meta">
+              <span class="idea__type">Baby shower</span>
+              <h3 class="idea__name">Dulce espera</h3>
+              <p class="idea__desc">Nubes, luna y estrellitas</p>
+              <span class="idea__colors" role="img" aria-label="Colores: celeste, durazno y crema"><i style="--c:#CFE2F3"></i><i style="--c:#F3CDA6"></i><i style="--c:#FAF3EA"></i></span>
+              <a class="idea__cta" href="#formulario" aria-label="Quiero una invitación como el diseño Dulce espera">Quiero una así</a>
+            </div>
+          </article>
+
+          <!-- Sorpresa · revelación de género -->
+          <article class="idea reveal" data-tipo="Revelación de género" data-tematica="Como el diseño «Sorpresa»: globos rosa y celeste" data-colores="Rosa, celeste y dorado">
+            <button class="idea__cover cv--sorpresa" type="button" aria-label="Ver en grande el diseño Sorpresa">
+              <img class="cv__foto" src="img/ideas/sorpresa.jpg" alt="" width="860" height="1517" loading="lazy" decoding="async">
+              <span class="idea__hover">Ver en grande</span>
+            </button>
+            <div class="idea__meta">
+              <span class="idea__type">Revelación</span>
+              <h3 class="idea__name">Sorpresa</h3>
+              <p class="idea__desc">Globos rosa y celeste</p>
+              <span class="idea__colors" role="img" aria-label="Colores: rosa, celeste y dorado"><i style="--c:#F2A7B5"></i><i style="--c:#9CC6EA"></i><i style="--c:#E9C46A"></i></span>
+              <a class="idea__cta" href="#formulario" aria-label="Quiero una invitación como el diseño Sorpresa">Quiero una así</a>
+            </div>
+          </article>
+
+          <!-- Luz · comunión -->
+          <article class="idea reveal" data-tipo="Comunión" data-tematica="Como el diseño «Luz»: cruz fina con espigas de trigo" data-colores="Marfil, dorado y tierra">
+            <button class="idea__cover cv--luz" type="button" aria-label="Ver en grande el diseño Luz">
+              <svg class="cv__art" viewBox="0 0 90 160">
+                <defs>
+                  <radialGradient id="lz-halo"><stop offset="0" stop-color="#EAD6A8" stop-opacity=".6"/><stop offset="1" stop-color="#EAD6A8" stop-opacity="0"/></radialGradient>
+                  <g id="lz-espiga">
+                    <path d="M0 0V-26" fill="none" stroke="#B89A62" stroke-width=".45" stroke-linecap="round"/>
+                    <g fill="#C9AD76">
+                      <ellipse cx="-1.1" cy="-13" rx=".85" ry="2" transform="rotate(-24 -1.1 -13)"/>
+                      <ellipse cx="1.1" cy="-15.5" rx=".85" ry="2" transform="rotate(24 1.1 -15.5)"/>
+                      <ellipse cx="-1.1" cy="-18" rx=".85" ry="2" transform="rotate(-24 -1.1 -18)"/>
+                      <ellipse cx="1.1" cy="-20.5" rx=".85" ry="2" transform="rotate(24 1.1 -20.5)"/>
+                      <ellipse cx="-1.1" cy="-23" rx=".85" ry="2" transform="rotate(-24 -1.1 -23)"/>
+                      <ellipse cx="1.1" cy="-25.5" rx=".85" ry="2" transform="rotate(24 1.1 -25.5)"/>
+                      <ellipse cy="-28.2" rx=".8" ry="2"/>
+                    </g>
+                  </g>
+                </defs>
+                <rect x="6" y="6" width="78" height="148" fill="none" stroke="#D8C49A" stroke-width=".3"/>
+                <g transform="translate(0 14)">
+                  <circle cx="45" cy="36" r="28" fill="url(#lz-halo)"/>
+                  <path d="M57.56 37.36 66.25 39.69M32.44 37.36 23.75 39.69M32.44 30.64 23.75 28.31M35.81 24.81 29.44 18.44M41.64 21.44 39.31 12.75M48.36 21.44 50.69 12.75M54.19 24.81 60.56 18.44M57.56 30.64 66.25 28.31" stroke="#D9C291" stroke-width=".3" stroke-linecap="round"/>
+                  <path d="M45 24V62M37 34H53" stroke="#B89A62" stroke-width="1.1" stroke-linecap="round"/>
+                  <use href="#lz-espiga" transform="translate(47 67) rotate(-30)"/>
+                  <use href="#lz-espiga" transform="translate(43 67) rotate(30)"/>
+                </g>
+              </svg>
+              <span class="cv__txt">
+                <span class="cv__kicker">mi primera comunión</span>
+                <span class="cv__name">Tomás</span>
+                <span class="cv__rule"></span>
+                <span class="cv__date">sáb 07 · 11 · 10 h</span>
+                <span class="cv__place">Parroquia San José</span>
+              </span>
+              <span class="idea__hover">Ver en grande</span>
+            </button>
+            <div class="idea__meta">
+              <span class="idea__type">Comunión</span>
+              <h3 class="idea__name">Luz</h3>
+              <p class="idea__desc">Marfil, trigo y dorado</p>
+              <span class="idea__colors" role="img" aria-label="Colores: marfil, dorado y tierra"><i style="--c:#FAF5EA"></i><i style="--c:#C9AD76"></i><i style="--c:#5A4E3E"></i></span>
+              <a class="idea__cta" href="#formulario" aria-label="Quiero una invitación como el diseño Luz">Quiero una así</a>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="ideas__foot reveal">
+          <p>¿Tenés otra idea en mente? Contanos cuál es y la diseñamos para vos.</p>
+          <a class="btn-ghost" href="#formulario">Contanos tu idea</a>
         </div>
       </section>
     </div>
@@ -306,7 +650,7 @@
 
           <div class="feat reveal">
             <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="12" width="38" height="25" rx="2"/><path d="M5 14l19 14 19-14"/></svg>
-            <h3>RSVP</h3><p>Confirmación de asistencia online</p>
+            <h3>Confirmación</h3><p>Tus invitados confirman su asistencia por WhatsApp</p>
           </div>
 
           <div class="feat reveal">
@@ -349,12 +693,72 @@
     </div>
   </div>
 
+  <div class="slide slide--glass" data-id="precios" data-label="Precios">
+    <div class="slide__scroll">
+      <!-- ══════════════ PRECIOS ══════════════ -->
+      <section class="pricing" id="precios">
+        <header class="sec-head reveal">
+          <span class="sec-head__eyebrow">elegí la tuya</span>
+          <h2 class="sec-head__title">Precios</h2>
+          <p class="sec-head__note">Diseñada a medida y lista en <em>3 días</em>.</p>
+        </header>
+
+        <div class="pricing__grid">
+
+          <article class="plan plan--main reveal">
+            <span class="plan__tag">Recomendada</span>
+            <h3 class="plan__name">Completa</h3>
+            <p class="plan__price"><small>$</small>80.000</p>
+            <p class="plan__sub">en 3 partes, con video</p>
+            <ol class="plan__parts">
+              <li><b>Mensaje de bienvenida</b><span>Portada con botón para abrirla</span></li>
+              <li><b>Video emotivo</b><span>Con música y frases</span></li>
+              <li><b>La información</b><span>Datos del evento, enlace al GPS y confirmación de asistencia por WhatsApp</span></li>
+            </ol>
+            <a class="btn-solid" href="https://wa.me/5493786417162?text=%C2%A1Hola!%20Quiero%20la%20invitaci%C3%B3n%20completa%2C%20con%20video" target="_blank" rel="noopener">La quiero</a>
+          </article>
+
+          <article class="plan reveal">
+            <h3 class="plan__name">Simple</h3>
+            <p class="plan__price"><small>$</small>50.000</p>
+            <p class="plan__sub">en 2 partes, sin video</p>
+            <ol class="plan__parts">
+              <li><b>Una imagen</b><span>Diseñada con la temática de tu evento</span></li>
+              <li><b>La información</b><span>Datos del evento, enlace al GPS y confirmación de asistencia por WhatsApp</span></li>
+            </ol>
+            <a class="btn-ghost" href="https://wa.me/5493786417162?text=%C2%A1Hola!%20Quiero%20la%20invitaci%C3%B3n%20simple%2C%20sin%20video" target="_blank" rel="noopener">La quiero</a>
+          </article>
+
+        </div>
+
+        <div class="pricing__terms">
+
+          <div class="feat reveal">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19"/><path d="M24 13v11l7 5"/></svg>
+            <h3>Lista en 3 días</h3><p>Desde que nos pasás todos los datos</p>
+          </div>
+
+          <div class="feat reveal">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><circle cx="24" cy="24" r="19"/><path d="M31 17L17 31"/><circle cx="18" cy="18" r="2.6"/><circle cx="30" cy="30" r="2.6"/></svg>
+            <h3>Seña del 10%</h3><p>Con eso reservás y empezamos a diseñar</p>
+          </div>
+
+          <div class="feat reveal">
+            <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="5" y="11" width="38" height="26" rx="3"/><path d="M5 19h38M11 30h9"/></svg>
+            <h3>2 cuotas sin interés</h3><p>Pagala en dos partes, sin recargo</p>
+          </div>
+
+        </div>
+      </section>
+    </div>
+  </div>
+
   <div class="slide slide--photo" data-id="contacto" data-label="Contacto">
     <div class="slide__scroll">
       <!-- ══════════════ CONTACTO ══════════════ -->
       <section class="contact" id="contacto">
         <div class="contact__media">
-          <img src="img/seccion-4.jpg" alt="Ambientación en tonos beige con luz cálida y ramas secas" loading="lazy" decoding="async">
+          <img src="img/seccion-4-hd.jpg" alt="Ambientación en tonos beige con luz cálida y ramas secas" width="2208" height="3528" loading="lazy" decoding="async">
         </div>
 
         <div class="contact__inner reveal">
@@ -364,12 +768,165 @@
           <a class="btn-solid" href="https://wa.me/5493786417162?text=%C2%A1Hola!%20Quiero%20hacer%20una%20invitaci%C3%B3n%20digital%20personalizada" target="_blank" rel="noopener">
             WhatsApp · 3786 417162
           </a>
+          <a class="contact__alt" href="#formulario">o completá el formulario con los datos</a>
         </div>
       </section>
+    </div>
+  </div>
 
+  <div class="slide slide--glass" data-id="formulario" data-label="Tu invitación">
+    <div class="slide__scroll">
+      <!-- ══════════════ 6 · FORMULARIO ══════════════ -->
+      <section class="order" id="formulario">
+        <header class="sec-head reveal">
+          <span class="sec-head__eyebrow">tu historia</span>
+          <h2 class="sec-head__title">Contanos sobre<br>tu evento</h2>
+          <p class="sec-head__note">Completá los datos y nos llegan directo por WhatsApp para empezar a diseñar tu invitación.</p>
+        </header>
+
+        <form class="order__form reveal" id="orderForm" novalidate>
+
+          <fieldset class="order__group">
+            <legend class="order__legend">Tu evento</legend>
+            <div class="field">
+              <label for="f-tipo">Tipo de evento</label>
+              <select id="f-tipo" name="tipo">
+                <option value="">Elegí una opción</option>
+                <option>Cumpleaños de 15</option>
+                <option>Cumpleaños infantil</option>
+                <option>Casamiento</option>
+                <option>Baby shower</option>
+                <option>Revelación de género</option>
+                <option>Comunión</option>
+                <option>Otro</option>
+              </select>
+            </div>
+          </fieldset>
+
+          <fieldset class="order__group">
+            <legend class="order__legend">Sobre vos</legend>
+            <div class="field">
+              <label for="f-cliente">Tu nombre *</label>
+              <input id="f-cliente" name="cliente" type="text" autocomplete="name" required>
+            </div>
+          </fieldset>
+
+          <fieldset class="order__group">
+            <legend class="order__legend">El protagonista</legend>
+            <div class="field field--half">
+              <label for="f-nombre">Nombre *</label>
+              <input id="f-nombre" name="nombre" type="text" required placeholder="Ej: Maia">
+            </div>
+            <div class="field field--half">
+              <label for="f-edad">Edad que cumple</label>
+              <input id="f-edad" name="edad" type="number" min="0" max="120" inputmode="numeric" placeholder="Ej: 5">
+            </div>
+          </fieldset>
+
+          <fieldset class="order__group">
+            <legend class="order__legend">Cuándo y dónde</legend>
+            <div class="field">
+              <label for="f-fecha">Fecha *</label>
+              <input id="f-fecha" name="fecha" type="date" required>
+            </div>
+            <div class="field field--half">
+              <label for="f-desde">Desde</label>
+              <input id="f-desde" name="desde" type="time">
+            </div>
+            <div class="field field--half">
+              <label for="f-hasta">Hasta</label>
+              <input id="f-hasta" name="hasta" type="time">
+            </div>
+            <div class="field">
+              <label for="f-lugar">Lugar</label>
+              <input id="f-lugar" name="lugar" type="text" placeholder="Ej: América Eventos">
+            </div>
+            <div class="field">
+              <label for="f-direccion">Dirección / ubicación *</label>
+              <input id="f-direccion" name="direccion" type="text" required placeholder="Calle, número, ciudad o link de Google Maps">
+            </div>
+          </fieldset>
+
+          <fieldset class="order__group">
+            <legend class="order__legend">El estilo</legend>
+            <div class="field">
+              <label for="f-tematica">Temática *</label>
+              <input id="f-tematica" name="tematica" type="text" required placeholder="Ej: princesas, safari, Harry Potter…">
+            </div>
+            <div class="field">
+              <label for="f-colores">Colores</label>
+              <input id="f-colores" name="colores" type="text" placeholder="Ej: rosa y dorado">
+            </div>
+            <div class="field">
+              <label for="f-cancion">Canción</label>
+              <input id="f-cancion" name="cancion" type="text" placeholder="Nombre y artista, o link de YouTube / Spotify">
+            </div>
+            <div class="field">
+              <label for="f-video">Video que quieras agregar</label>
+              <input id="f-video" name="video" type="text" placeholder="Link de YouTube, Drive, etc.">
+              <small class="field__hint">Si lo tenés en el celular, después nos lo mandás por WhatsApp.</small>
+            </div>
+            <div class="field">
+              <label for="f-mensaje">Algo más que quieras contarnos</label>
+              <textarea id="f-mensaje" name="mensaje" rows="4" placeholder="Una frase especial, regalos, dress code, ideas…"></textarea>
+            </div>
+          </fieldset>
+
+          <p class="order__error" id="orderError" role="alert" hidden>Completá los campos marcados con *</p>
+
+          <div class="order__foot">
+            <button class="btn-solid" type="submit">Enviar por WhatsApp</button>
+          </div>
+        </form>
+      </section>
+
+    </div>
+  </div>
+
+  <div class="slide slide--glass" data-id="historia" data-label="Historia" data-tone="dark">
+    <div class="slide__scroll">
+      <!-- ══════════════ 7 · LA FRASE SOBRE VIDEO ══════════════
+           El video es decorativo y va sin sonido; se reproduce sólo
+           mientras la sección está a la vista (ver script.js). -->
+      <section class="story" id="historia">
+        <div class="story__media">
+          <video class="story__video" id="storyVideo"
+                 src="img/video-historia.mp4" poster="img/video-historia.jpg"
+                 muted loop playsinline webkit-playsinline preload="metadata"
+                 aria-hidden="true"></video>
+        </div>
+        <div class="story__veil"></div>
+
+        <div class="story__inner">
+          <p class="story__quote reveal">
+            <span class="story__comilla">“</span>Cada invitación está pensada<br>
+            <em>para contar una historia.</em><span class="story__comilla">”</span>
+          </p>
+        </div>
+      </section>
       <footer class="foot">
-        <span class="foot__name">Paczko.web</span>
-        <span class="foot__sub">invitaciones</span>
+        <a href="#hero" class="foot__brand">
+          <span class="foot__name">Paczko.web</span>
+          <span class="foot__sub">invitaciones</span>
+        </a>
+
+        <!-- Los mismos enlaces del menú de arriba -->
+        <nav class="foot__links" aria-label="Secciones del sitio">
+          <a href="#trabajos">Invitaciones</a>
+          <a href="#recorrido">Recorrido</a>
+          <a href="#ideas">Diseños</a>
+          <a href="#ofrecemos">Lo que ofrecemos</a>
+          <a href="#precios">Precios</a>
+          <a href="#formulario">Pedí la tuya</a>
+          <a href="#contacto">Escribinos</a>
+        </nav>
+
+        <a class="foot__wa" href="https://wa.me/5493786417162?text=%C2%A1Hola!%20Quiero%20hacer%20una%20invitaci%C3%B3n%20digital%20personalizada" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.2 5.08 4.48.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2"/></svg>
+          WhatsApp · 3786 417162
+        </a>
+
+        <p class="foot__copy">© <span id="footYear">2026</span> Paczko.web · Invitaciones digitales personalizadas</p>
       </footer>
     </div>
   </div>
@@ -387,6 +944,27 @@
 <a class="wa-float" href="https://wa.me/5493786417162?text=%C2%A1Hola!%20Quiero%20hacer%20una%20invitaci%C3%B3n%20digital%20personalizada" target="_blank" rel="noopener" aria-label="Escribinos por WhatsApp">
   <svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M17.47 14.38c-.3-.15-1.76-.87-2.03-.97-.27-.1-.47-.15-.67.15-.2.3-.77.97-.94 1.17-.17.2-.35.22-.65.07-.3-.15-1.26-.46-2.4-1.48-.89-.79-1.49-1.76-1.66-2.06-.17-.3-.02-.46.13-.61.14-.14.3-.35.45-.52.15-.17.2-.3.3-.5.1-.2.05-.37-.02-.52-.08-.15-.67-1.61-.92-2.21-.24-.58-.49-.5-.67-.51h-.57c-.2 0-.52.07-.79.37-.27.3-1.04 1.02-1.04 2.48s1.06 2.88 1.21 3.08c.15.2 2.09 3.2 5.08 4.48.71.31 1.26.49 1.69.62.71.23 1.36.2 1.87.12.57-.09 1.76-.72 2.01-1.42.25-.7.25-1.29.17-1.42-.07-.13-.27-.2-.57-.35M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38c1.45.79 3.08 1.21 4.79 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2"/></svg>
 </a>
+
+<!-- ══════════════ VISOR · un diseño en grande ══════════════
+     Se abre al tocar una portada de "Un poco más de nuestros diseños":
+     script.js copia la portada adentro de .zoom__stage. -->
+<div class="zoom" id="zoom" role="dialog" aria-modal="true" aria-labelledby="zoomName" hidden>
+  <div class="zoom__veil" data-zoom-cerrar></div>
+
+  <button class="zoom__close" type="button" aria-label="Cerrar" data-zoom-cerrar></button>
+  <button class="zoom__nav zoom__nav--prev" id="zoomPrev" type="button" aria-label="Diseño anterior"></button>
+  <button class="zoom__nav zoom__nav--next" id="zoomNext" type="button" aria-label="Diseño siguiente"></button>
+
+  <figure class="zoom__fig">
+    <div class="zoom__stage" id="zoomStage"></div>
+    <figcaption class="zoom__cap">
+      <span class="zoom__type" id="zoomType"></span>
+      <h3 class="zoom__name" id="zoomName"></h3>
+      <p class="zoom__desc" id="zoomDesc"></p>
+      <a class="idea__cta zoom__cta" id="zoomCta" href="#formulario">Quiero una así</a>
+    </figcaption>
+  </figure>
+</div>
 
 <script src="script.js"></script>
 </body>
